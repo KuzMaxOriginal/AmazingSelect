@@ -8,6 +8,8 @@ const optionList = OPTIONS.map((option, index) => ({
   label: option,
 }))
 
+const optionMap = Object.fromEntries(optionList.map(item => [item.id, item]));
+
 let selectedList = []
 
 const getFilteredOptions = (search) => optionList.filter(item => item.label.toLowerCase()
@@ -18,7 +20,7 @@ const port = process.env.VITE_PORT
 app.use(cors())
 
 app.get('/selected-options', (req, res) => {
-  res.send(selectedList)
+  res.send(selectedList.map(id => optionMap[id]))
 })
 
 app.get('/options/:page?', (req, res) => {
@@ -38,12 +40,17 @@ app.get('/options/:page?', (req, res) => {
 })
 
 app.get('/update-selected/', (req, res) => {
-  const ids = req.query?.ids?.split(',')
-  selectedList = ids.map(Number)
+  const ids = req.query?.ids
+  let selected = []
+
+  if (ids) {
+    selected = ids.split(',').map(Number)
+  }
+
+  selectedList = selected
 
   res.send({
     status: 'success',
-    selected: selectedList,
   })
 })
 

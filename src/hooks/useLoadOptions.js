@@ -33,10 +33,6 @@ export default ({
   const selected = await fetchSelected()
 
   if (selected) {
-    const mappedValue = selected
-      .map(id => options
-        .find(option => option.id === id))
-
-    setValues(mappedValue)
+    setValues(selected)
   }
 }
