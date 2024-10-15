@@ -9,15 +9,22 @@ export default function AmazingTag(props) {
     setNodeRef,
     transform,
     transition
-  } = useSortable({ id: props.value.id })
+  } = useSortable({
+    id: props.value.id,
+  })
 
   const style = {
-    transform: CSS.Transform.toString(transform),
+    transform: CSS.Translate.toString(transform),
     transition
   }
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+    >
       <Chip
         sx={{ mr: 0.5, mb: 0.25, mt: 0.25 }}
         key={props.value?.label}

@@ -1,5 +1,9 @@
 import {closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors} from "@dnd-kit/core"
-import {SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy} from "@dnd-kit/sortable"
+import {
+  rectSwappingStrategy,
+  SortableContext,
+  sortableKeyboardCoordinates,
+} from "@dnd-kit/sortable"
 import AmazingTag from "./AmazingTag"
 
 export default function AmazingTags(props) {
@@ -22,7 +26,7 @@ export default function AmazingTags(props) {
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
     >
-      <SortableContext items={props.values} strategy={verticalListSortingStrategy}>
+      <SortableContext items={props.values} strategy={rectSwappingStrategy}>
         {props.values.map((id) => (
           <AmazingTag
             onDelete={props.onDelete}
